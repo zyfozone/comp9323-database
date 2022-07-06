@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+//import './App.css'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import MyPage from './pages/MyPage';
+import EditIndividualInfo from './pages/EditIndividualInfo';
+
+//import React from 'react';
+
+import { Button } from 'antd';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    // router configuration
+    <BrowserRouter>
+      <div className="App">
+        <Button type="primary">Primary Button</Button>
+        <Routes>
+          {/* create route path and relations */} 
+          {/* <Route path='/' element={<FrontPage />}></Route> */} {/* this spare is for the main page */}
+          <Route path='/MyPage' element={<MyPage />}></Route>
+          <Route path='/MyPage/EditIndividualInfo' element={<EditIndividualInfo />}></Route>
+        </Routes>
+      </div>
+    </BrowserRouter>
+  )
 }
 
 export default App;
