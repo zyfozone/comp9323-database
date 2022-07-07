@@ -23,15 +23,16 @@
     left:250px;
     font-size: 30px;
 
-    .user-name::after {
-        content: '';
-        //display: block;
-        display: inline-block;
-        width: 25px;
-        height: 25px;
-        background: url('~@/assets/sad.png') no-repeat center center;
-        background-size: cover;
-    }
+
+}
+.user-name::after {
+    content: '';
+    display: block;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background: url('~@/assets/sad.png') no-repeat center center;
+    background-size: cover;
 }
 
 
@@ -55,42 +56,33 @@
     right:30px;
     top:90px;
 }
-    
 
-
-
-.follow {
-    min-height: 80px;
-    padding: 24px;
-    margin-top:3px;
-    background: rgb(100, 195, 188);
-
+#job-company{
+    font-size: 23px;
 }
 
-.job-preference {
-    min-height: 80px;
-    padding: 24px;
-    margin-top:3px;
-    background: rgb(62, 127, 127);
+#job-position{
+    font-size: 15px;
+    line-height: 3px;
 }
 
-.released {
-    min-height: 80px;
-    padding: 24px;
-    margin-top:3px;
-    background: rgb(122, 196, 196);
+.text-under-avatar{
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    width: 120px;
 }
 
-.contains-preference {
-    min-height: 80px;
-    padding: 24px;
-    margin-top:3px;
-    background: rgb(38, 115, 115);
+.button-in-cols {
+    // vertical-align: middle;
+    // display: table-cell;
+    // text-align: center;
+    padding-top:20px;
 }
+// .follow {
+//     min-height: 80px;
+//     padding: 24px;
+//     margin-top:3px;
+//     background: rgb(100, 195, 188);
 
-.mood-diary {
-    min-height: 80px;
-    padding: 24px;
-    margin-top:3px;
-    background: rgb(39, 62, 62);
-}
+// }
