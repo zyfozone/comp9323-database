@@ -1,22 +1,54 @@
-import { Layout, Avatar, Button, Card, Row, Col, Space} from "antd"
-import { UserOutlined } from '@ant-design/icons';
 import './MyPage.scss'
+import React from 'react';
+import { Layout, Avatar, Button, Card, Space, List} from "antd"
+import { UserOutlined} from '@ant-design/icons';
 
 
-const {  Header, Content } = Layout;
+const {  Header, Content, Footer} = Layout;
+const companyData = [
+    {
+      title: 'Microsoft',
+      description: 'AI Developer' 
+    },
+    {
+      title: 'Amazon',
+      description: 'UI Developer' 
+    },
+    {
+      title: 'Google',
+      description: 'DevOps' 
+    },
+];
+
+const articleData = [
+    {
+      title: 'Article_1',
+      description: 'Description of this post, Description of this post' 
+    },
+    {
+      title: 'Article_2',
+      description: 'Description of this post, Description of this post' 
+    },
+    {
+      title: 'Video_1',
+      description: 'Description of this post, Description of this post' 
+    },
+];
+
+  
 
 const MyPage = () => {
     return (
         <Layout>
-            <Header style={{ height:'150px' }}>
+            <Header style={{ height:'150px'}}>
                 <div className="header-content">
                     <div className="user-icon">
                         <Avatar size={100} icon={<UserOutlined />} />
                     </div>
 
-                    <span className="user-name">user.name</span>
+                    <span className="user-name">Micky Mouse</span>
                     <br/>
-                    <span className="user-identity">user.identity</span>
+                    <span className="user-identity">UNSW, Student, IT</span>
                     
 
                     <div className="edit">
@@ -28,10 +60,12 @@ const MyPage = () => {
                 </div>
             </Header>
             
-            <Content style={{ padding: '0 50px' }}>
+            <Content style={{ padding: '0 50px'}}>
                 <Card
                     title="Follow"
-                    extra={<a href="@">More</a>}
+                    extra={
+                        <a href="@">More</a>
+                    }
                     style={{
                         width: '100%',
                         textAlign: 'left',
@@ -88,6 +122,7 @@ const MyPage = () => {
                         </div>
                     </Space>
                 </Card>
+
                 <Card
                     title="Job Preference"
                     extra={<a href="@">More</a>}
@@ -96,55 +131,104 @@ const MyPage = () => {
                         textAlign: 'left',
                     }}
                     type="inner"
-                    
                 >
-                    <Space
-                        direction="vertical"
-                        size="middle"
-                        style={{
-                        display: 'flex',
-                        }}
-                    >
-                    <Row>
-                        <Col span={4} align='center'>
-                            <div class="text-under-avatar">
-                                <Avatar size={70} icon={<UserOutlined />} />
-                                <span style={{display:"block"}}>user</span>
-                            </div>
-                        </Col>
-                        <Col span={6} align='left'>
-                            <p id="job-company">Job.company</p>
-                            <p id="job-position">Job.position</p>
-                        </Col>
-                        <Col span={12}></Col>
-                        <Col span={2} className="button-in-cols">
-                            <Button type="primary" size={'18px'} href='@' >check</Button>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col span={4} align='center'>
-                            <div class="text-under-avatar">
-                                <Avatar size={70} icon={<UserOutlined />} />
-                                <span style={{display:"block"}}>user</span>
-                            </div>
-                        </Col>
-                        <Col span={6} align='left'>
-                            <p id="job-company">Job.company</p>
-                            <p id="job-position">Job.position</p>
-                        </Col>
-                        <Col span={12}></Col>
-                        <Col span={2} className="button-in-cols">
-                            <Button type="primary" size={'18px'} href='@' >check</Button>
-                        </Col>
-                    </Row>
-                    </Space>
-                    
+                    <List
+                        itemLayout="horizontal"
+                        dataSource={companyData}
+                        renderItem={(item) => (
+                        <List.Item>
+                            <List.Item.Meta
+                            avatar={<Avatar size={50} icon={<UserOutlined />} />}
+                            title={<a href="@">{item.title}</a>}
+                            description={item.description}
+                            />
+                            <div><Button>check</Button></div>
+                        </List.Item>
+                        
+                        )}
+                    />
                     
                 </Card>
-               
+
+                <Card
+                    title="Released"
+                    extra={<a href="@">More</a>}
+                    style={{
+                        width: '100%',
+                        textAlign: 'left',
+                    }}
+                    type="inner"
+                >
+                    <List
+                        itemLayout="horizontal"
+                        dataSource={articleData}
+                        renderItem={(item) => (
+                        <List.Item>
+                            <List.Item.Meta
+                            avatar={
+                                <img width={80} alt="logo" 
+                                    src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"/>}
+                                title={<a href="@">{item.title}</a>}
+                                description={item.description}
+                            />
+                            <Space
+                                direction="horizontal"
+                                size="middle"
+                                style={{
+                                display: 'flex',
+                                }}
+                            >
+                                <div><Button>Edit</Button></div>
+                                <div><Button>Check</Button></div>
+                            </Space>
+                        </List.Item>
+                        
+                        )}
+                    />
+                    
+                </Card>
+
+                <Card
+                    title="Liked"
+                    extra={<a href="@">More</a>}
+                    style={{
+                        width: '100%',
+                        textAlign: 'left',
+                    }}
+                    type="inner"
+                >
+                    <List
+                        itemLayout="horizontal"
+                        dataSource={articleData}
+                        renderItem={(item) => (
+                        <List.Item>
+                            <List.Item.Meta
+                            avatar={
+                                <img width={80} alt="logo" 
+                                    src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"/>}
+                                title={<a href="@">{item.title}</a>}
+                                description={item.description}
+                            />
+                            <Space
+                                direction="horizontal"
+                                size="middle"
+                                style={{
+                                display: 'flex',
+                                }}
+                            >
+                                <div><Button>Check</Button></div>
+                            </Space>
+                        </List.Item>
+                        
+                        )}
+                    />
+                    
+                </Card>                  
+
             </Content>
 
-
+            <Footer style={{ textAlign: 'center' }}>COMP9323 ©2022 T2 Created by "Github Is Savior"</Footer>
+            
         </Layout>
     )
 }
