@@ -2,6 +2,7 @@ import './App.css'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import MyPage from '@/pages/MyPage';
 import Follow from '@/pages/Follow';
+import JobPreference from '@/pages/JobPreference';
 
 //import React from 'react';
 
@@ -18,6 +19,7 @@ function App() {
           {/* <Route path='/' element={<FrontPage />}></Route> */} {/* this spare is for the main page */}
           <Route path='/MyPage' element={<MyPage />}></Route>
           <Route path='/MyPage/Follow' element={<Follow />}></Route>
+          <Route path='/MyPage/JobPreference' element={<JobPreference />}></Route>
         </Routes>
       </div>
     </BrowserRouter>
