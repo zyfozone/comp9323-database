@@ -1,7 +1,7 @@
 import './App.css'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import MyPage from '@/pages/MyPage';
-import EditIndividualInfo from '@/pages/EditIndividualInfo';
+import Follow from '@/pages/Follow';
 
 //import React from 'react';
 
@@ -17,7 +17,7 @@ function App() {
           {/* create route path and relations */} 
           {/* <Route path='/' element={<FrontPage />}></Route> */} {/* this spare is for the main page */}
           <Route path='/MyPage' element={<MyPage />}></Route>
-          <Route path='/MyPage/EditIndividualInfo' element={<EditIndividualInfo />}></Route>
+          <Route path='/MyPage/Follow' element={<Follow />}></Route>
         </Routes>
       </div>
     </BrowserRouter>

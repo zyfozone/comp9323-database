@@ -64,7 +64,7 @@ const MyPage = () => {
                 <Card
                     title="Follow"
                     extra={
-                        <a href="@">More</a>
+                        <a href='./Follow'>More</a>
                     }
                     style={{
                         width: '100%',
