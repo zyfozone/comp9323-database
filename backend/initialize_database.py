@@ -35,8 +35,7 @@ def create_database():
     (2, "Enterprise", "qwerty"),
     (3, "Company", "zxcvbn");
     '''
-    #name 拼错了
-    #添加了Occupation
+
     Individual_table = '''
     CREATE TABLE IF NOT EXISTS `Individual` (
     `IndividualId` int NOT NULL AUTO_INCREMENT,
@@ -73,7 +72,7 @@ def create_database():
     (3, 3, "90,000 per year", "7h per day", "mechanical");
     '''
 
-    #分离了content的部分
+ 
     Individual_prefer = '''
     CREATE TABLE IF NOT EXISTS `IndividualPrefer` (
     `PreferID` int NOT NULL AUTO_INCREMENT,
