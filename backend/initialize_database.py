@@ -95,7 +95,7 @@ def create_database():
     `ContentLink` varchar(255) NOT NULL,
     `ContentLikeNum` int NOT NULL,
     `ContentTag` varchar(255) NOT NULL,
-    PRIMARY KEY (`ContentID`)'''
+    PRIMARY KEY (`ContentID`));'''
     
     insert_content = '''
     INSERT INTO `Content` VALUES 
