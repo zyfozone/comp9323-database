@@ -7,7 +7,7 @@ def create_database():
     conn = pymysql.connect(host=DB_URL,
                            user=DB_ACCOUNT,
                            password=DB_PASSWORD)
-    conn.cursor().execute('''create database if not exists wellbeing''')
+    conn.cursor().execute('''create database if not exists demo''')
     conn.close()
     db = pymysql.connect(
         host=DB_URL,
@@ -23,7 +23,7 @@ def create_database():
     Organization_table = '''
     CREATE TABLE IF NOT EXISTS `Organization` (
     `OrganizationId` int NOT NULL AUTO_INCREMENT,
-    `OrganizationNmae` varchar(255) DEFAULT NULL,
+    `OrganizationName` varchar(255) DEFAULT NULL,
     `Password` varchar(255) NOT NULL,
     PRIMARY KEY (`OrganizationId`)
     );
