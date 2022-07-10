@@ -39,7 +39,7 @@ class IndividualRegister(Resource):
                 }
                 return output, 403
             else:
-                IndividualID = 100
+                IndividualID = 0
                 sql = "INSERT INTO individual VALUES ({},'{}', '{}', '{}', '{}');".format(IndividualID, IndividualName, Password, Preference, Occupation)
                 sql_command(sql)
                 select_sql = f"SELECT IndividualID FROM Individual WHERE IndividualName='{IndividualName}';"
@@ -75,7 +75,7 @@ class OrganizationRegister(Resource):
                 }
                 return output, 403
             else:
-                OrganizationID = 101
+                OrganizationID = 0
                 sql = "INSERT INTO organization VALUES ({},'{}','{}');".format(OrganizationID, OrganizationName, Password)
                 sql_command(sql)
                 select_sql = f"SELECT OrganizationID FROM organization WHERE OrganizationName='{OrganizationName}';"
