@@ -14,7 +14,7 @@ def create_database():
         port=DB_PORT,
         user=DB_ACCOUNT,
         password=DB_PASSWORD,
-        database=DB_NAME,·
+        database=DB_NAME,
         charset='utf8'
     )
     c = db.cursor()
