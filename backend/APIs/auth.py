@@ -12,12 +12,12 @@ auth = api.namespace('auth', description='Authentication Service')
 # route function
 # individual user's sign up
 @auth.route('/signup/individual', doc={"description": "new individual user registration"})
-@api.response(400, 'Bad Request')
-@api.response(403, 'Forbiddent')
-@api.response(201, 'Created')
+@auth.response(400, 'Bad Request')
+@auth.response(403, 'Forbiddent')
+@auth.response(201, 'Created')
 class IndividualRegister(Resource):
     @auth.expect(individual_model)
-    @api.doc(description='Registration a new individual to database')
+    @auth.doc(description='Registration a new individual to database')
     def post(self):
         data = json.loads(request.get_data())
         IndividualName = data['IndividualName']
@@ -50,9 +50,9 @@ class IndividualRegister(Resource):
 
 #organization user's sign up
 @auth.route('/signup/organization', doc={"description": "new organization user registration"})
-@api.response(400, 'Bad Request')
-@api.response(403, 'Forbiddent')
-@api.response(201, 'Created')
+@auth.response(400, 'Bad Request')
+@auth.response(403, 'Forbiddent')
+@auth.response(201, 'Created')
 class OrganizationRegister(Resource):
     @auth.expect(organization_model)
     def post(self):
@@ -88,8 +88,8 @@ class OrganizationRegister(Resource):
 class Login(Resource):
     @auth.response(200, 'OK')
     @auth.response(400, 'Bad Request')
+    @auth.response(403, 'Forbiddent')
     @auth.response(404, 'Not Found')
-    @auth.response(201, 'Created')
     @auth.expect(login_model)
     def post(self):
         data = json.loads(request.get_data())
@@ -120,6 +120,6 @@ class Login(Resource):
                 return output, 200
             else:
                 output = {
-                        "message": "Wrong password"
+                    "message": "Wrong password"
                 }
                 return output, 403
