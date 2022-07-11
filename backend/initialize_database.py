@@ -27,7 +27,7 @@ def create_database():
     `OrganizationName` varchar(255) DEFAULT NULL,
     `Password` varchar(255) NOT NULL,
     `Description` varchar(255)  DEFAULT NULL,
-    `icon` varchar(255) DEFAULT NULL,
+    `Icon` varchar(255) DEFAULT NULL,
     PRIMARY KEY (`OrganizationId`)
     );
     '''
@@ -35,7 +35,7 @@ def create_database():
     insert_organization = '''
     INSERT INTO `Organization` VALUES 
     (1, "Anonymous", "123456","good",""),
-    (2, "Enterprise", "qwerty","we are rich",""),
+    (2, "Enterprise", "qwerty","we are rich","/src/assets/sad.png"),
     (3, "Company", "zxcvbn","","");
     '''
     
@@ -52,9 +52,9 @@ def create_database():
 
     insert_individual = '''
     INSERT INTO `Individual` VALUES 
-    (4, "Anonymous", "123456", "computer", "IT"),
-    (5, "John", "qwerty", "economy", "Financial Analyst"),
-    (6, "Elen", "zxcvbn", "mechanical", "Mechanical Engineers");
+    (1, "Anonymous", "123456", "computer", "IT"),
+    (2, "John", "qwerty", "economy", "Financial Analyst"),
+    (3, "Elen", "zxcvbn", "mechanical", "Mechanical Engineers");
     '''
 
     Organization_offer = '''
@@ -79,7 +79,7 @@ def create_database():
     CREATE TABLE IF NOT EXISTS `IndividualPrefer` (
     `PreferID` int NOT NULL AUTO_INCREMENT,
     `IndividualId` int NOT NULL,
-    `ContentID` int NOT NULL,
+    `ArticleID` int NOT NULL,
     PRIMARY KEY (`PreferID`)
     );
     ''' 
@@ -90,13 +90,13 @@ def create_database():
     (2, 2, 2),
     (3, 3, 3);
     '''
-    vedio_table = '''
-    CREATE TABLE IF NOT EXISTS `Content` (
-    `ContentID` int NOT NULL AUTO_INCREMENT,
-    `ContentLink` varchar(255) NOT NULL,
-    `ContentLikeNum` int NOT NULL,
-    `ContentTag` varchar(255) NOT NULL,
-    PRIMARY KEY (`ContentID`));'''
+    Vedio_table = '''
+    CREATE TABLE IF NOT EXISTS `Vedio` (
+    `VedioID` int NOT NULL AUTO_INCREMENT,
+    `VedioLink` varchar(255) NOT NULL,
+    `VedioLikeNum` int NOT NULL,
+    `VedioTag` varchar(255) NOT NULL,
+    PRIMARY KEY (`VedioID`));'''
     
     insert_vedio = ''''''
 
@@ -114,8 +114,19 @@ def create_database():
     (2, "fdgsdfgdf", 0, "economy"),
     (3, "asdfasdfsfasdf",0, "mechanical");
     '''
-
-
+    FollowList ='''
+    CREATE TABLE IF NOT EXISTS `followlist` (
+    `FollowID` int NOT NULL AUTO_INCREMENT,
+    `IndividualID` int NOT NULL,
+    `FollowedID` int NOT NULL,
+    PRIMARY KEY (`followID`));
+    '''
+    insert_follow = '''
+    INSERT INTO `FollowList` VALUES 
+    (1, 1, 1),
+    (2, 1, 2),
+    (3, 2, 2);
+    '''
     Individual_mood = '''
     CREATE TABLE IF NOT EXISTS `Mood` (
     `MoodID` int NOT NULL AUTO_INCREMENT,
@@ -139,6 +150,7 @@ def create_database():
     c.execute(Organization_offer)
     c.execute(Article_table)
     c.execute(Individual_prefer)
+    c.execute(FollowList)
     c.execute(Individual_mood)
 
 #insert data
@@ -152,10 +164,11 @@ def create_database():
     db.commit()
     c.execute(insert_article)
     db.commit()
+    c.execute(insert_follow)
+    db.commit()
     c.execute(insert_mood)
     db.commit()
-    
-    
+     
     c.close()
 
     return True
