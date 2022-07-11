@@ -64,7 +64,7 @@ const MyPage = () => {
                 <Card
                     title="Follow"
                     extra={
-                        <a href='./Follow' >More</a>
+                        <a href='./MyPage/Follow' >More</a>
                     }
                     style={{
                         width: '100%',
@@ -125,7 +125,7 @@ const MyPage = () => {
 
                 <Card
                     title="Job Preference"
-                    extra={<a href="./JobPreference">More</a>}
+                    extra={<a href="./MyPage/JobPreference">More</a>}
                     style={{
                         width: '100%',
                         textAlign: 'left',

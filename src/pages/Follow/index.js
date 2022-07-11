@@ -172,7 +172,7 @@ const Follow = () => {
                     width: '100%',
                     }}
                     title="Follow"
-                    extra={<a href="./MyPage">Back</a>}
+                    extra={<a href="../MyPage">Back</a>}
                     tabList={tabList}
                     activeTabKey={activeTabKey}
                     onTabChange={(key) => {

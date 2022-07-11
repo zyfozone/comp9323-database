@@ -20,8 +20,8 @@ function App() {
           {/* create route path and relations */} 
           {/* <Route path='/' element={<FrontPage />}></Route> */} {/* this spare is for the main page */}
           <Route path='/MyPage' element={<MyPage />}></Route>
-          <Route path='/Follow' element={<Follow />}></Route>
-          <Route path='/JobPreference' element={<JobPreference />}></Route>
+          <Route path='MyPage/Follow' element={<Follow />}></Route>
+          <Route path='MyPage/JobPreference' element={<JobPreference />}></Route>
           <Route path='/Test' element={<Test />}></Route>
         </Routes>
       </div>
