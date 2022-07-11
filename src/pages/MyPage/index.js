@@ -64,7 +64,7 @@ const MyPage = () => {
                 <Card
                     title="Follow"
                     extra={
-                        <a href='./Follow'>More</a>
+                        <a href='./Follow' >More</a>
                     }
                     style={{
                         width: '100%',
@@ -80,15 +80,15 @@ const MyPage = () => {
                         display: 'flex',
                         }}
                     >
-                        <div class="text-under-avatar">
+                        <div className="text-under-avatar">
                             <Avatar size={60} icon={<UserOutlined />} />
                             <span style={{display:"block"}}>user</span>
                         </div>
-                        <div class="text-under-avatar">
+                        <div className="text-under-avatar">
                             <Avatar size={60} icon={<UserOutlined />} />
                             <span style={{display:"block"}}>user</span>
                         </div>
-                        <div class="text-under-avatar">
+                        <div className="text-under-avatar">
                             <Avatar size={60} icon={<UserOutlined />} />
                             <span style={{display:"block"}}>user</span>
                         </div>
@@ -104,19 +104,19 @@ const MyPage = () => {
                         display: 'flex',
                         }}
                     >
-                        <div class="text-under-avatar">
+                        <div className="text-under-avatar">
                             <Avatar size={60} icon={<UserOutlined />} />
                             <span style={{display:"block"}}>user</span>
                         </div>
-                        <div class="text-under-avatar">
+                        <div className="text-under-avatar">
                             <Avatar size={60} icon={<UserOutlined />} />
                             <span style={{display:"block"}}>user</span>
                         </div>
-                        <div class="text-under-avatar">
+                        <div className="text-under-avatar">
                             <Avatar size={60} icon={<UserOutlined />} />
                             <span style={{display:"block"}}>user</span>
                         </div>
-                        <div class="text-under-avatar">
+                        <div className="text-under-avatar">
                             <Avatar size={60} icon={<UserOutlined />} />
                             <span style={{display:"block"}}>user</span>
                         </div>
@@ -125,7 +125,7 @@ const MyPage = () => {
 
                 <Card
                     title="Job Preference"
-                    extra={<a href="@">More</a>}
+                    extra={<a href="./JobPreference">More</a>}
                     style={{
                         width: '100%',
                         textAlign: 'left',

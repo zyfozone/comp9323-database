@@ -104,7 +104,7 @@ const JobPreference = () => {
                     width: '100%',
                     }}
                     title="Job Preference"
-                    extra={<a href="../MyPage">Back To MyPage</a>}                         
+                    extra={<a href="../MyPage">Back</a>}                         
 
                 >
                     {SetContains()}
