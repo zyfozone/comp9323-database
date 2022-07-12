@@ -56,9 +56,9 @@ class FollowList(Resource):
                 link_dict['previous'] = ''
                 link_dict['next'] = ''
                 output = {
-                    'page':0,
+                    #'page':0,
                     'message': result,
-                    '_link': link_dict
+                    #'_link': link_dict
                 }
                 return output, 200
             else:
