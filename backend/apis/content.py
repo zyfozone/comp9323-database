@@ -1,53 +1,127 @@
+from distutils.log import ERROR
 import json
 from flask import request
 from flask_restx import Resource
+from flask_restx import reqparse
+from requests import delete
 from models.request_model import *
 from tool import *
+
+
+followed = reqparse.RequestParser()
+followed.add_argument('contID',type = int,help = 'cont name',required = True,location='form')
 
 # define namespace
 cont = api.namespace('cont', description='Content Service')
 
-# cont api is for content recommandation
+# cont api is for content event
+
 @cont.route('/<int:individualID>/recommandationList', doc={'description': 'get recommanded content list'})
 @cont.response(400, 'Bad Request')
-@cont.response(403, 'Forbiddent')
+
 @cont.response(200, 'Ok')
 class RecommandationList(Resource):
     def get(self, individualID):
         return 200
 
-# cont api is for preference list       
+     
 @cont.route('/<int:individualID>/preferList', doc={'description': 'get preference list'})
 @cont.response(400, 'Bad Request')
-@cont.response(403, 'Forbiddent')
+
 @cont.response(200, 'Ok')
 class PreferList(Resource):
     def get(self, individualID):
         return 200
 
-# cont api is for follow list     
-@cont.route('/<int:individualID>/followList', doc={'description': 'get follow list'})
+ 
+@cont.route('/<int:individualID>/followList', doc={'description': 'follow list operation'})
 @cont.response(400, 'Bad Request')
-@cont.response(403, 'Forbiddent')
+@cont.response(404, 'Not Found')
 @cont.response(200, 'Ok')
 class FollowList(Resource):
+    @cont.doc(description = 'get follow list')
     def get(self, individualID):
-        get_sql = f"SELECT FollowedID FROM FollowList WHERE individualID='{individualID}';"
-        result_from_db = sql_command(get_sql)
-        if result_from_db:
-            result = []
-            link_dict = {}
-            for e in result_from_db:
-                get_sql = f"SELECT OrganizationId,OrganizationName,Description,Icon FROM Organization WHERE OrganizationId='{e[0]}';"
-                result_from_db = sql_result_with_decription(get_sql)
-                result_from_db['follow'] = 'follow'
-                result.append(result_from_db)
-            link_dict['previous'] = ''
-            link_dict['next'] = ''
+        user_sql = f"SELECT individualName FROM individual WHERE IndividualID={individualID};"
+        if sql_command(user_sql):
+            follow_sql = f"SELECT FollowedID FROM FollowList WHERE IndividualID={individualID};"
+            result_from_db = sql_command(follow_sql)
+            if result_from_db:
+                result = []
+                link_dict = {}
+                for e in result_from_db:
+                    org_sql = f"SELECT OrganizationId,OrganizationName,Description,Icon FROM Organization WHERE OrganizationId='{e[0]}';"
+                    result_from_db = sql_result_with_decription(org_sql)
+                    result_from_db['follow'] = 'follow'
+                    result.append(result_from_db)
+                link_dict['previous'] = ''
+                link_dict['next'] = ''
+                output = {
+                    'page':0,
+                    'message': result,
+                    '_link': link_dict
+                }
+                return output, 200
+            else:
+                output = {
+                    'message': 'This account does not follow anyone'
+                }
+                return output, 200
+        else:
             output = {
-                'page':0,
-                'message': result,
-                '_link': link_dict
+                'message': 'Please input user vaild ID'
             }
-            return output, 200
-        
+            return output, 404
+    
+    @cont.doc(description = 'add new article follow')
+    @cont.expect(followed,validate=True)
+    def post(self,individualID):
+        user_sql = f"SELECT individualName FROM individual WHERE IndividualID={individualID};"
+        if sql_command(user_sql):
+            contID = followed.parse_args()['contID']
+            art_sql = f"SELECT * FROM Article WHERE ArticleID={contID};"
+            if sql_command(art_sql):
+                follow_sql = f"INSERT IGNORE INTO FollowList VALUES ({individualID},{contID},'article');"
+                try:
+                    sql_command(follow_sql)
+                except:
+                    pass
+                output = {
+                    'message': 'well done'
+                }
+                return output,200
+            else:
+                output = {
+                    'message': 'Please input vaild article ID'
+                }
+        else:
+            output = {
+                'message': 'Please input vaild user ID'
+            }
+            return output, 404
+
+    @cont.doc(description = 'delete new follow')
+    @cont.expect(followed,validate=True)
+    def delete(self,individualID):
+        user_sql = f"SELECT individualName FROM individual WHERE IndividualID={individualID};"
+        if sql_command(user_sql):
+            contID = followed.parse_args()['contID']
+            art_sql = f"SELECT * FROM Article WHERE ArticleID = {contID};"
+            if sql_command(art_sql):
+                follow_sql = f"DELETE from FollowList WHERE individualID = {individualID} AND ArticleID = {contID};"
+                try:
+                    sql_command(follow_sql)
+                except:
+                    pass
+                output = {
+                    'message': 'well done'
+                }
+                return output,200
+            else:
+                output = {
+                    'message': 'Please input vaild article ID'
+                }
+        else:
+            output = {
+                'message': 'Please input vaild user ID'
+            }
+            return output, 404
