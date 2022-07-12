@@ -3,7 +3,8 @@ import { Header, Footer, Content } from "antd/lib/layout/layout";
 import React, { useState} from 'react';
 import './index.scss'
 import { UserOutlined} from '@ant-design/icons';
-const fakeDataUrl = `https://randomuser.me/api/?results=1&inc=name,gender,email,nat,picture&noinfo`;
+// const id = 2;
+const fakeDataUrl = 'http://127.0.0.1:5000/cont/1/followList';
 
 
 
@@ -22,25 +23,30 @@ const tabList = [
 
 class Company extends React.Component{
 
-    state = {
-        companyLikeList:[ 
-            {
-                id: 1,
-                avatar: 'avatar link',
-                name: 'company A',
-                description: 'description of company a',
-                follow: 'Follow'
-            },
-            {
-                id: 2,
-                avatar: 'avatar link',
-                name: 'company B',
-                description: 'description of company b',
-                follow: 'Follow'
-            },
-        ],
-        loading: false,
-        initialLoading: true 
+    constructor(){
+        super()
+        this.state = {
+            companyLikeList: [
+                {
+                    OrganizationId: "",
+                    OrganizationName: "",
+                    Description:"",
+                    Icon:"",
+                    follow: ""
+                }
+            ]
+        }
+    }
+
+    componentDidMount(){
+        fetch(fakeDataUrl)
+            .then(res => {return res.json()})
+            .then(data => {
+                this.setState({
+                    companyLikeList: data.message
+                })
+                console.log(this.state.companyLikeList)
+            })
     }
 
     clickFollowHandler = (curItem) =>{
@@ -64,53 +70,7 @@ class Company extends React.Component{
         })
     }
 
-    // onLoadMoreHandler = (curItem) => {    
-        
-    //     const {laoding, initLoading} = curItem
 
-    //     this.setState({
-    //         loading: this.state.loading = false
-    //         // setLoading(true);
-
-
-    //     })
-     
-    //     setList(
-    //     data.concat(
-    //         [...new Array(count)].map(() => ({
-    //         loading: true,
-    //         name: {},
-    //         picture: {},
-    //         })),
-    //     ),
-    //     );
-    //     fetch(fakeDataUrl)
-    //     .then((res) => res.json())
-    //     .then((res) => {
-    //         const newData = data.concat(res.results);
-    //         setData(newData);
-    //         setList(newData);
-    //         setLoading(false); // Resetting window's offsetTop so as to display react-virtualized demo underfloor.
-    //         // In real scene, you can using public method of react-virtualized:
-    //         // https://stackoverflow.com/questions/46700726/how-to-use-public-method-updateposition-of-react-virtualized
-
-    //         window.dispatchEvent(new Event('resize'));
-    //     });
-    // };
-
-    loadMore =
-        !this.state.initLoading && !this.state.loading ? (
-        <div
-            style={{
-            textAlign: 'center',
-            marginTop: 12,
-            height: 32,
-            lineHeight: '32px',
-            }}
-        >
-            <Button onClick={this.onLoadMoreHandler}>loading more</Button>
-        </div>
-        ) : null;
 
     render(){
         return <div>
@@ -122,8 +82,8 @@ class Company extends React.Component{
                 <List.Item>
                     <List.Item.Meta
                     avatar={<Avatar size={45} icon={<UserOutlined />} />}
-                    title={<a href="@">{item.name}</a>}
-                    description={item.description}
+                    title={<a href="@">{item.OrganizationName}</a>}
+                    description={item.Description}
                     />
                     <Button onClick={() => this.clickFollowHandler(item)}>{item.follow}</Button>
                 </List.Item>

@@ -2,9 +2,9 @@ import { Layout, List, Avatar} from "antd"
 import { Header, Footer, Content } from "antd/lib/layout/layout";
 import React from "react";
 import './Test.scss'
-import { UserOutlined} from '@ant-design/icons';
-import axios from "axios";
-const fakeDataUrl = `https://randomuser.me/api/?results=1&inc=name,gender,email,nat,picture&noinfo`;
+//const fakeDataUrl = `https://randomuser.me/api/?results=1&inc=name,gender,email,nat,picture&noinfo`;
+const id = 2;
+const fakeDataUrl = 'http://127.0.0.1:5000/cont/1/followList';
 
 
 
@@ -12,20 +12,33 @@ const fakeDataUrl = `https://randomuser.me/api/?results=1&inc=name,gender,email,
 
 class Company extends React.Component{
 
-    state = {
-        companyLikeList: [],
-
-    }
-    loadList = async () => {
-        const res = await axios.get(fakeDataUrl)
-        console.log(res)
-        this.setState({
-            companyLikeList: res.data
-        })
+    // state = {
+    //     companyLikeList: [],
+    // }
+    constructor(){
+        super()
+        this.state = {
+            companyLikeList: [
+                {
+                    OrganizationId: "",
+                    OrganizationName: "",
+                    Description:"",
+                    Icon:"",
+                    follow: ""
+                }
+            ]
+        }
     }
 
     componentDidMount(){
-        this.loadList()
+        fetch(fakeDataUrl)
+            .then(res => {return res.json()})
+            .then(data => {
+                this.setState({
+                    companyLikeList: data.message
+                })
+                console.log(this.state.companyLikeList)
+            })
     }
 
     // componentDidMount(){
@@ -59,8 +72,9 @@ class Company extends React.Component{
                 <List.Item>
                     <List.Item.Meta
                     //avatar={<Avatar size={45} icon={<UserOutlined />} />}
-                    title={<a href="@">{item.name}</a>}
-                    description={item.email}
+                    avatar={item.Icon}
+                    title={<a href="@">{item.OrganizationName}</a>}
+                    description={item.Description}
                     />
                     
                 </List.Item>

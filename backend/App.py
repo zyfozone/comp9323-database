@@ -1,4 +1,6 @@
 
+import apis.auth
+import apis.content
 # start run the flask server
 try:
     from flask_app import app
