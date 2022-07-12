@@ -118,14 +118,15 @@ def create_database():
     CREATE TABLE IF NOT EXISTS `followlist` (
     `FollowID` int NOT NULL AUTO_INCREMENT,
     `IndividualID` int NOT NULL,
-    `FollowedID` int NOT NULL,
+    `ArticleID` int NOT NULL,
+    `Type` varchar(255) NOT NULL,
     PRIMARY KEY (`followID`));
     '''
     insert_follow = '''
     INSERT INTO `FollowList` VALUES 
-    (1, 1, 1),
-    (2, 1, 2),
-    (3, 2, 2);
+    (1, 1, 1, "article"),
+    (2, 1, 2, "article"),
+    (3, 2, 2, "article");
     '''
     Individual_mood = '''
     CREATE TABLE IF NOT EXISTS `Mood` (
