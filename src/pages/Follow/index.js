@@ -47,18 +47,19 @@ class Company extends React.Component{          // company follow tab
 
 
 
-    componecntDidMount(){
-        fetch(fakeDataUrl, 
-            {method: 'GET',
-        })
+    componentDidMount(){
+        //console.log(this.state)
+        fetch(fakeDataUrl)
+            //{method: 'GET',}
+            //)
             .then(res => {return res.json()})
             .then(data => {
-                //console.log(data.message)
+                //console.log(data)
                 this.setState({
                     companyLikeList: data.message
                     //companyLikeList: useStore().GetLikeList(1)
                 })
-                //console.log(this.state.companyLikeList)
+                console.log(this.state.companyLikeList)
             })
     }
     
