@@ -3,10 +3,11 @@ import { Header, Footer, Content } from "antd/lib/layout/layout";
 import React, { useState} from 'react';
 import './index.scss'
 import { UserOutlined} from '@ant-design/icons';
+import { useStore } from "@/store"; 
+import { http } from "@/utils"
+
 // const id = 2;
 const fakeDataUrl = 'http://127.0.0.1:5000/cont/1/followList';
-
-
 
 const tabList = [
     {
@@ -19,12 +20,18 @@ const tabList = [
     }
 ];
 
+function GetLikeList(id){
+    const {user} = useStore();
+    return user.GetLikeList(id);
+}
 
 
-class Company extends React.Component{
+class Company extends React.Component{          // company follow tab 
+
 
     constructor(){
         super()
+        
         this.state = {
             companyLikeList: [
                 {
@@ -38,16 +45,27 @@ class Company extends React.Component{
         }
     }
 
-    componentDidMount(){
-        fetch(fakeDataUrl)
+
+
+    componecntDidMount(){
+        fetch(fakeDataUrl, 
+            {method: 'GET',
+        })
             .then(res => {return res.json()})
             .then(data => {
+                //console.log(data.message)
                 this.setState({
                     companyLikeList: data.message
+                    //companyLikeList: useStore().GetLikeList(1)
                 })
-                console.log(this.state.companyLikeList)
+                //console.log(this.state.companyLikeList)
             })
     }
+    
+
+
+
+    // {() => this.GetLikeList(2)}
 
     clickFollowHandler = (curItem) =>{
         console.log(curItem)    
@@ -93,7 +111,7 @@ class Company extends React.Component{
     }
 }
 
-class Individual extends React.Component{
+class Individual extends React.Component{    // individual follow tab
     render(){
         return <div>
             Individual
@@ -101,7 +119,7 @@ class Individual extends React.Component{
     }
 }
 
-const loadContents = (currTab) => {
+const loadContents = (currTab) => {            // determine which tab to show
     if(currTab === 'Company'){
       return <div><Company/></div>
     }
