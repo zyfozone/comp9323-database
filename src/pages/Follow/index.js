@@ -49,9 +49,8 @@ class Company extends React.Component{          // company follow tab
 
     componentDidMount(){
         //console.log(this.state)
-        fetch(fakeDataUrl)
-            //{method: 'GET',}
-            //)
+        fetch(fakeDataUrl,
+            {method: 'GET',})
             .then(res => {return res.json()})
             .then(data => {
                 //console.log(data)
@@ -59,7 +58,7 @@ class Company extends React.Component{          // company follow tab
                     companyLikeList: data.message
                     //companyLikeList: useStore().GetLikeList(1)
                 })
-                console.log(this.state.companyLikeList)
+                //console.log(this.state.companyLikeList)
             })
     }
     
