@@ -16,7 +16,11 @@ followed.add_argument('contID',type = int,help = 'cont name',required = False,lo
 # define namespace
 cont = api.namespace('cont', description='Content Service')
 
+<<<<<<< HEAD
 # # cont api is for content event
+=======
+# cont api is for content event
+>>>>>>> 4a4eaf8fe88720f12bd3a66eb5917c58b8ff982f
 #########
 @cont.route('/test', doc={'description': 'test'})
 @cont.response(400, 'Bad Request')
@@ -29,7 +33,10 @@ class test(Resource):
                 'message': f'{request.values.to_dict()}'
             }
         return output, 200
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4a4eaf8fe88720f12bd3a66eb5917c58b8ff982f
 ###############
 
 
