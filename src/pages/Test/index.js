@@ -3,7 +3,7 @@ import { Header, Footer, Content } from "antd/lib/layout/layout";
 import React, { useState, useEffect} from 'react';
 import './Test.scss'
 import { UserOutlined} from '@ant-design/icons';
-import { useStore } from "@/store"; 
+// import { useStore } from "@/store"; 
 import { http } from "@/utils"
 
 // const id = 2;
@@ -45,7 +45,7 @@ function Company(){          // company follow tab
         }    
         Getlist()
     }, [])
-    const  {IndividualFollowCompany} = useStore();
+    // const  {IndividualFollowCompany} = useStore();
 
     function clickFollowHandler(id){
         

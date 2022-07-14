@@ -9,12 +9,29 @@ from tool import *
 
 
 followed = reqparse.RequestParser()
-followed.add_argument('contID',type = int,help = 'cont name',required = True,location='form')
+# followed.add_argument('contID',type = int,help = 'cont name',required = True,location='form')
+followed.add_argument('contID',type = int,help = 'cont name',required = False,location='form')
+
 
 # define namespace
 cont = api.namespace('cont', description='Content Service')
 
-# cont api is for content event
+# # cont api is for content event
+#########
+@cont.route('/test', doc={'description': 'test'})
+@cont.response(400, 'Bad Request')
+@cont.response(200, 'Ok')
+class test(Resource):
+    def post(self):
+
+        print(request.values.to_dict())
+        output = {
+                'message': f'{request.values.to_dict()}'
+            }
+        return output, 200
+
+###############
+
 
 @cont.route('/<int:individualID>/recommandationList', doc={'description': 'get recommanded content list'})
 @cont.response(400, 'Bad Request')
@@ -102,9 +119,16 @@ class FollowList(Resource):
     @cont.doc(description = 'delete new follow')
     @cont.expect(followed,validate=True)
     def delete(self,individualID):
+
+
         user_sql = f"SELECT individualName FROM individual WHERE IndividualID={individualID};"
         if sql_command(user_sql):
             contID = followed.parse_args()['contID']
+
+            print(contID)
+            print(request.json)
+
+
             art_sql = f"SELECT * FROM Article WHERE ArticleID = {contID};"
             if sql_command(art_sql):
                 follow_sql = f"DELETE from FollowList WHERE individualID = {individualID} AND ArticleID = {contID};"
@@ -125,3 +149,7 @@ class FollowList(Resource):
                 'message': 'Please input vaild user ID'
             }
             return output, 404
+        
+        
+        
+        
