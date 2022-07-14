@@ -15,6 +15,20 @@ followed.add_argument('contID',type = int,help = 'cont name',required = True,loc
 cont = api.namespace('cont', description='Content Service')
 
 # cont api is for content event
+#########
+@cont.route('/test', doc={'description': 'test'})
+@cont.response(400, 'Bad Request')
+@cont.response(200, 'Ok')
+class test(Resource):
+    def post(self):
+
+        print(request.values.to_dict())
+        output = {
+                'message': f'{request.values.to_dict()}'
+            }
+        return output, 200
+###############
+
 
 @cont.route('/<int:individualID>/recommandationList', doc={'description': 'get recommanded content list'})
 @cont.response(400, 'Bad Request')
@@ -125,3 +139,7 @@ class FollowList(Resource):
                 'message': 'Please input vaild user ID'
             }
             return output, 404
+        
+        
+        
+        
