@@ -135,7 +135,7 @@ class FollowList(Resource):
                 for indID in indID_list:
                     ind_sql = f"SELECT * FROM individual WHERE IndividualID = {indID};"
                     if sql_command(ind_sql):
-                        follow_sql = f"DELETE from FollowList WHERE individualID = {individualID} AND FollowedID = {indID} AND Type = 'individual';"
+                        follow_sql = f"DELETE from indFollowList WHERE individualID = {individualID} AND indID = {indID};"
                         try:
                             sql_command(follow_sql)
                             pass
@@ -156,7 +156,7 @@ class FollowList(Resource):
                 for orgID in orgID_list:
                     org_sql = f"SELECT * FROM Organization WHERE OrganizationID = {orgID};"
                     if sql_command(org_sql):
-                        follow_sql = f"DELETE from FollowList WHERE IndividualID = {individualID} AND FollowedID = {orgID} AND Type = 'organization';"
+                        follow_sql = f"DELETE from orgFollowList WHERE IndividualID = {individualID} AND orgID = {orgID};"
                         try:
                             sql_command(follow_sql)
                             pass
