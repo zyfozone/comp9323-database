@@ -115,20 +115,33 @@ def create_database():
     (2, "fdgsdfgdf", 0, "economy"),
     (3, "asdfasdfsfasdf",0, "mechanical");
     '''
-    FollowList ='''
-    CREATE TABLE IF NOT EXISTS `followlist` (
+    FollowList_ind ='''
+    CREATE TABLE IF NOT EXISTS `indfollowlist` (
     `FollowID` int NOT NULL AUTO_INCREMENT,
     `IndividualID` int NOT NULL,
-    `FollowedID` int NOT NULL,
-    `Type` varchar(255) NOT NULL,
+    `indID` int NOT NULL,
     PRIMARY KEY (`followID`));
     '''
-    insert_follow = '''
+    insert_follow_ind = '''
     INSERT INTO `FollowList` VALUES 
-    (1, 1, 1, "organization"),
-    (2, 1, 2, "individual"),
-    (3, 2, 2, "individual");
+    (1, 1, 1),
+    (2, 1, 2),
+    (3, 2, 2);
     '''
+    FollowList_org ='''
+    CREATE TABLE IF NOT EXISTS `orgfollowlist` (
+    `FollowID` int NOT NULL AUTO_INCREMENT,
+    `IndividualID` int NOT NULL,
+    `orgID` int NOT NULL,
+    PRIMARY KEY (`followID`));
+    '''
+    insert_follow_org = '''
+    INSERT INTO `FollowList` VALUES 
+    (1, 1, 1),
+    (2, 1, 2),
+    (3, 2, 2);
+    '''
+    
     Individual_mood = '''
     CREATE TABLE IF NOT EXISTS `Mood` (
     `MoodID` int NOT NULL AUTO_INCREMENT,
@@ -152,7 +165,8 @@ def create_database():
     c.execute(Organization_offer)
     c.execute(Article_table)
     c.execute(Individual_prefer)
-    c.execute(FollowList)
+    c.execute(FollowList_ind)
+    c.execute(FollowList_org)
     c.execute(Individual_mood)
 
 #insert data
@@ -166,7 +180,9 @@ def create_database():
     db.commit()
     c.execute(insert_article)
     db.commit()
-    c.execute(insert_follow)
+    c.execute(insert_follow_org)
+    db.commit()
+    c.execute(insert_follow_ind)
     db.commit()
     c.execute(insert_mood)
     db.commit()
