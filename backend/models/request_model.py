@@ -84,3 +84,8 @@ review_model = api.model("review", {
     "review": fields.String,
     "rating": fields.Integer
 })
+
+follow_model = api.model("followed", {
+    "Company": fields.List(fields.Integer),
+    "Individual": fields.List(fields.Integer)
+})
