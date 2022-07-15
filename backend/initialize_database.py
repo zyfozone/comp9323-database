@@ -80,15 +80,16 @@ def create_database():
     `PreferID` int NOT NULL AUTO_INCREMENT,
     `IndividualId` int NOT NULL,
     `ArticleID` int NOT NULL,
+    `Type` varchar(255) NOT NULL,
     PRIMARY KEY (`PreferID`)
     );
     ''' 
-    
+
     insert_individualPrefer = '''
     INSERT INTO `IndividualPrefer` VALUES 
-    (1, 1, 1),
-    (2, 2, 2),
-    (3, 3, 3);
+    (1, 1, 1, "article"),
+    (2, 1, 2, "article"),
+    (3, 2, 2, "article");
     '''
     Vedio_table = '''
     CREATE TABLE IF NOT EXISTS `Vedio` (
@@ -118,15 +119,15 @@ def create_database():
     CREATE TABLE IF NOT EXISTS `followlist` (
     `FollowID` int NOT NULL AUTO_INCREMENT,
     `IndividualID` int NOT NULL,
-    `ArticleID` int NOT NULL,
+    `FollowedID` int NOT NULL,
     `Type` varchar(255) NOT NULL,
     PRIMARY KEY (`followID`));
     '''
     insert_follow = '''
     INSERT INTO `FollowList` VALUES 
-    (1, 1, 1, "article"),
-    (2, 1, 2, "article"),
-    (3, 2, 2, "article");
+    (1, 1, 1, "organization"),
+    (2, 1, 2, "individual"),
+    (3, 2, 2, "individual");
     '''
     Individual_mood = '''
     CREATE TABLE IF NOT EXISTS `Mood` (
